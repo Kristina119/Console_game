@@ -114,11 +114,12 @@ void bochka(int& result, int& another_result, int& bolt1, int& bolt2)//880
 		if (mis == 3) { result -= 100; return; }
 		if (another_result >= 880)
 		{
-			bochka(another_result, result, bolt2, bolt1);
 			result -= 100;
+			bochka(another_result, result, bolt2, bolt1);
 		}
 	}
 }
+
 
 void whole_game(int& player1, int& player2, string name1, string name2)
 {
@@ -163,14 +164,17 @@ void whole_game(int& player1, int& player2, string name1, string name2)
 		case 2://бочка по очкам
 		{
 			srand(time(NULL));
-			while (player1 < 1000 || player2 < 1000)
+			while (player1 < 1000 && player2 < 1000)
 			{
 				if (player2 > player1) check_player2 = 1;
 				if (player1 > player2) check_player1 = 1;
-				cout << "\n\tХод " << name1 << endl;
+
+				cout << "\n\t~~~Ход " << name1 << "~~~" << endl;
 				cin.get();
-				tern(player1, player1_bolt);//ходы
-				cout << "\n\tХод " << name2 << endl;
+				tern(player1, player1_bolt);
+
+				cout << "\n\t~~~Ход " << name2 << "~~~" << endl;
+				if (name2 != "Computer") cin.get();
 				tern(player2, player2_bolt);
 				samosval_obgon(player1, player2, name1, name2, check_player1, check_player2);
 
@@ -178,7 +182,8 @@ void whole_game(int& player1, int& player2, string name1, string name2)
 				if (player1 >= 880) bochka(player1, player2, player1_bolt, player2_bolt);
 
 				cout << "\nСЧЕТ ПОСЛЕ ЭТОГО ХОДА:\n";
-				cout << "Счет " << name1 << ": " << player1 << "\tСчет " << name2 << ": " << player2 << "\n";
+				cout << "Счет " << name1 << ": " << player1 << "   Количество болтов " << player1_bolt << endl;
+				cout << "Счет " << name2 << ": " << player2 << "   Количество болтов " << player2_bolt << endl;
 				check_player2 = 0; check_player1 = 0;
 			}
 			if (player1 >= 1000) cout << "\n\t************************" << "\n\t   Победил " << name1 << "  cо счетом " << player1 << "\n\t************************";
@@ -188,30 +193,35 @@ void whole_game(int& player1, int& player2, string name1, string name2)
 		case 3: //с открытой бочкой
 		{
 			srand(time(NULL));
-			while (player1 != 1000 || player2 != 1000)
+			while (player1 != 1000 && player2 != 1000)
 			{
 				if (player2 > player1) check_player2 = 1;
 				if (player1 > player2) check_player1 = 1;
-				cout << "\n\tХод " << name2 << endl;
+
+				cout << "\n\t~~~Ход " << name1 << "~~~" << endl;
 				cin.get();
-				tern(player1, player1_bolt);//ходы
-				cout << "\n\tХод " << name2 << endl;
+				tern(player1, player1_bolt);
+
+				cout << "\n\t~~~Ход " << name2 << "~~~" << endl;
+				if (name2 != "Computer") cin.get();
 				tern(player2, player2_bolt);
 				samosval_obgon(player1, player2, name1, name2, check_player1, check_player2);
+
 				if (player1 == 1000) point1 += 1;
 				if (point1 == 6)
 				{
-					cout << "\nНабрано 6 точек (минус 100 очков) ";
-					player1 -= 100;
+					cout << "\nНабрано 6 точек (обнуление счета) ";
+					player1 = 0;
 				}
 				if (player2 == 1000) point2 += 1;
 				if (point2 == 6)
 				{
-					cout << "\nНабрано 6 точек (минус 100 очков) ";
-					player2 -= 100;
+					cout << "\nНабрано 6 точек (обнуление счета) ";
+					player2 = 0;
 				}
 				cout << "\nСЧЕТ ПОСЛЕ ЭТОГО ХОДА:\n";
-				cout << "Счет " << name1 << ": " << player1 << "\tСчет " << name2 << ": " << player2 << "\n";
+				cout << "Счет " << name1 << ": " << player1 << "   Количество болтов " << player1_bolt << "   Количество точек " << point1 << endl;
+				cout << "Счет " << name2 << ": " << player2 << "   Количество болтов " << player2_bolt << "   Количество точек " << point2 << endl;
 				check_player2 = 0; check_player1 = 0;
 			}
 			if (player1 == 1000) cout << "\n\t************************" << "\n\t   Победил " << name1 << "  cо счетом " << player1 << "\n\t************************";
