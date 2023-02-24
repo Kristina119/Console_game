@@ -402,28 +402,20 @@ int main()
 				cin >> who_play;
 				if (who_play < 1 || who_play>2) cout << "\nВведено недопустимое значение, попробуйте еще раз.\n\n";
 			}
-			switch (who_play)
+
+			cout << "\nВведите имя игрока: ";
+			cin >> name1;
+			if (who_play == 1) 
 			{
-			case 1: //с компьютером
-			{
-				cout << "\nВведите имя игрока: ";
-				cin >> name1;
 				name2 = "Computer";
 				whole_game(player1, computer, name1, name2);
-				break;
 			}
-			case 2: //с другим игроком
+			else
 			{
-				cout << "\nВведите имя первого игрока: ";
-				cin >> name1;
 				cout << "\nВведите имя второго игрока: ";
 				cin >> name2;
 				whole_game(player1, player2, name1, name2);
-				break;
 			}
-
-			}
-			break;
 		}
 		case 2://Правила
 		{
